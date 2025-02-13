@@ -11,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 /**
  * @property int $id
+ * @property mixed $links
  */
 class User extends Authenticatable
 {
