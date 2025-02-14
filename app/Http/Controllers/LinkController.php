@@ -37,24 +37,43 @@ class LinkController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Link $link)
+    public function edit(Link $link): View|Application|Factory
     {
-        //
+        return view('links.edit', compact('link'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLinkRequest $request, Link $link)
+    public function update(UpdateLinkRequest $request, Link $link): RedirectResponse
     {
-        //
+        $link->fill($request->validated())->save();
+
+        return to_route('dashboard')->with('message', 'Link alterado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Link $link)
+    public function destroy(Link $link): RedirectResponse
     {
-        //
+        $link->delete();
+
+        return to_route('dashboard')->with('message', 'Link excluído com sucesso!');
+    }
+
+    public function up(Link $link): RedirectResponse
+    {
+        $link->moveUp();
+
+        return to_route('dashboard');
+    }
+
+    public function down(Link $link): RedirectResponse
+    {
+        $link->moveDown();
+
+        return to_route('dashboard');
+
     }
 }
