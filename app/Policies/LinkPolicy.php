@@ -12,7 +12,7 @@ class LinkPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function denyAll(User $user, Link $link): Response
+    public function accessAll(User $user, Link $link): Response
     {
         return $link->user->is($user)
             ? Response::allow()
