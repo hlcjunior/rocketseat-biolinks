@@ -5,9 +5,17 @@
         <span>{{ session('message') }}</span>
     @endif
 
-    <form action="{{route('profile')}}" method="post">
+    <form action="{{route('profile')}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
+
+        <div>
+            <img src="{{ asset('storage/'.$user->photo) }}" alt="{{ $user->name }}" width="250px" />
+            <input type="file" name="photo" />
+            @error('photo')
+            <span>{{ $message }}</span>
+            @enderror
+        </div>
 
         <div>
             <input name="name" placeholder="Nome" value="{{ old('name',$user->name) }}">
