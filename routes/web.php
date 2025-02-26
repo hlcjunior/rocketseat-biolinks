@@ -26,14 +26,15 @@ Route::middleware('auth')->group(function (){
 
 
     Route::middleware('can:accessAll,link')->group(function (){
-        Route::get('/links/create', [LinkController::class,'create'])->name('links.create');
-        Route::post('/links/create', [LinkController::class,'store']);
         Route::get('/links/{link}/edit', [LinkController::class,'edit'])->name('links.edit');
         Route::put('/links/{link}/edit', [LinkController::class,'update']);
         Route::delete('/links/{link}', [LinkController::class,'destroy'])->name('links.destroy');
         Route::patch('/links/{link}/up', [LinkController::class, 'up'])->name('links.up');
         Route::patch('/links/{link}/down', [LinkController::class, 'down'])->name('links.down');
     });
+
+    Route::get('/links/create', [LinkController::class,'create'])->name('links.create');
+    Route::post('/links/create', [LinkController::class,'store']);
 
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update']);

@@ -8,7 +8,7 @@
     </head>
     <body class="bg-slate-900 text-slate-50 h-full">
 
-        <h1 class="font-bold text-3xl">Hello World!</h1>
+        {{ $slot }}
 
     </body>
 </html>

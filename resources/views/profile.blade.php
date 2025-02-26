@@ -1,54 +1,26 @@
-<div>
-    <h1>PROFILE</h1>
+<x-layout.app>
+    <x-container>
+        <x-card title="Profile">
+            <x-form :route="route('profile')" put enctype="multipart/form-data" id="profile-form">
 
-    @if(session('message'))
-        <span>{{ session('message') }}</span>
-    @endif
+                <div class="flex gap-2 items-center">
+                    <x-img src="{{ asset('storage/'.$user->photo) }}" alt="{{ $user->name }}"/>
+                    <x-file-input name="photo" />
+                </div>
 
-    <form action="{{route('profile')}}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('put')
+                <x-input name="name" type="text" placeholder="Name" value="{{old('name',$user->name)}}" />
 
-        <div>
-            <img src="{{ asset('storage/'.$user->photo) }}" alt="{{ $user->name }}" width="250px" />
-            <input type="file" name="photo" />
-            @error('photo')
-            <span>{{ $message }}</span>
-            @enderror
-        </div>
+                <x-textarea name="description" value="{{old('description',$user->description)}}"/>
 
-        <div>
-            <input name="name" placeholder="Nome" value="{{ old('name',$user->name) }}">
-            @error('name')
-            <span>{{ $message }}</span>
-            @enderror
-        </div>
+                <x-input name="handler" prefix="biolinks.com.br/" type="text" placeholder="Handler" value="{{old('handler',$user->handler)
+                }}" />
 
-        <br>
+            </x-form>
 
-        <div>
-            <textarea name="description" placeholder="Breve resumo">{{ old('description',$user->description)
-            }}</textarea>
-            @error('description')
-            <span>{{ $message }}</span>
-            @enderror
-        </div>
-
-        <br>
-
-        <div>
-            <span>biolinks.com.br/</span>
-            <input name="handler" placeholder="@seulink" value="{{ old('handler',$user->handler) }}">
-            @error('handler')
-            <span>{{ $message }}</span>
-            @enderror
-        </div>
-
-
-        <br>
-
-        <a href="{{route('dashboard')}}">Cancelar</a>
-
-        <button type="submit">Atualizar</button>
-    </form>
-</div>
+            <x-slot:actions>
+                <x-a :href="route('dashboard')">Cancel</x-a>
+                <x-button type="submit" form="profile-form">Update link</x-button>
+            </x-slot:actions>
+        </x-card>
+    </x-container>
+</x-layout.app>
