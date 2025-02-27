@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @property mixed $sort
  * @property User $user
+ * @property string $link
  */
 class Link extends Model
 {
